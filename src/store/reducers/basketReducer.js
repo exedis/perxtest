@@ -1,4 +1,4 @@
-import {differenceBy,differenceWith } from 'lodash';
+import { differenceBy, differenceWith, conforms, filter } from 'lodash';
 import { ADD_GOOD } from "../../constants";
 
 const defaultState = {
@@ -6,90 +6,63 @@ const defaultState = {
   totalCount: 0,
 };
 
-let tempGoodsArr = [];
+
 
 export const basketReducer = (state = defaultState, action) => {
 
   const addGood = (payload) => {
-  //  console.log('tempGoodsArr',tempGoodsArr);
-  let newArr = [];
+    //  let tempGoodsArr = [];
+    //   tempGoodsArr.push(payload);
+    const stateArr = state.goods;
+    if (state.goods.length >= 1) {
+      //const lastItemName = stateArr[stateArr.length - 1].name;
+      // let localCounter = stateArr[stateArr.length - 1].counter;
+      const checkSimple = filter(stateArr, { 'name': payload.name });
+      //let localCounter = 
+      if (checkSimple.length > 1) {
+        console.log('Dub', state);
 
-//  newArr = differenceWith(tempGoodsArr,[{name: payload.name}], 'isEqual');
+        // return {
+        //   ...state,
+        //   //goods: [...state.goods, payload],
+        //   goods: [
+        //     ...state.goods.map(i => {
+              
+        //        if (i.name === payload.name) {
+        //         return Object.assign({}, i, { counter: i.counter += payload.counter });
+        //       //   i.counter += payload.counter;
+        //        }
+        //     })
+        //   ],
 
-  //    if(tempGoodsArr.length > 1){
-  //       for(let i = 0; i <= tempGoodsArr.length; i++){
-  //         if(tempGoodsArr[i] != ''){
-  //         let check = tempGoodsArr.filter(i => i.name === tempGoodsArr[i].name);
-  //         console.log('check.length',check.length);
-  //           if(check.length > 1 ){
-  //             console.log('дубликат');
-  //           }
-  //         }else{
-  //           console.log('no name');
-  //         }
-  //       }
-  //  }
+        //   totalCount: state.totalCount + payload.counter,
+        // };
 
 
-// tempGoodsArr.map((item) => {
-//   let check = tempGoodsArr.filter(i => i.name === item.name);
-//  console.log('check.length',check.length);
-//   if(check.length > 1 ){
-//     console.log('дубликат');
-//     return;
-//   }
-// })
 
-// let godinf = tempGoodsArr.find(i => i.name === 'Go');
-// godinf.counter = 10;
-// console.log('godinf',godinf);
-
-  // let simpleArr = [];
-  // if(tempGoodsArr.length > 1){
-  //   for(let i= 0; i <= tempGoodsArr.length; i++){
-  //     for(let j= 0; j <= tempGoodsArr.length; j++){
-  //       if(tempGoodsArr[i].name === tempGoodsArr[j].name){
-  //         simpleArr.push(tempGoodsArr[i].count=21)
-  //       }
-  //     }
-  //   }
-  // }
- // console.log('newArr',simpleArr);
-//  console.log('tempGoodsArr',tempGoodsArr);
- //   console.log('difference',newArr);
-
-   // _.isEqual(one, two);
-
-  //  let newArr = tempGoodsArr.reduce(function(previousValue, currentValue, index, array) {
-  //     return differenceBy(tempGoodsArr,[{name: currentValue.name}], 'name')
-  //     //return previousValue + currentValue;
-  //   });
-   
-   
-   // console.log('unique',unique);
-   // if(!itemArr.length > 0){
+      } else {
+        console.log('orig', state);
+        return {
+          ...state,
+          goods: [...state.goods, payload],
+          totalCount: state.totalCount + payload.counter,
+        };
+      }
+    } else {
+      console.log('orig', state);
       return {
-      ...state,
-        goods: [
-          ...state.goods,
-          
-          {
-            name: action.payload.name,
-            price: action.payload.price,
-            image: action.payload.img,
-            count: 1
-          },
-        ],
-    
-        totalCount: state.totalCount + action.payload.counter,
+        ...state,
+        goods: [...state.goods, payload],
+        totalCount: state.totalCount + payload.counter,
       };
-   // }
+    }
     
+
+
   }
 
   switch (action.type) {
     case ADD_GOOD:
-      tempGoodsArr.push(action.payload); 
       return addGood(action.payload);
 
     case "REMOVE_GOOD":

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const totalCount = useSelector((state) => state.basketHandler.totalCount);
+  const goods = useSelector((state) => state.basketHandler.goods);
+  console.log('totalCountgoods',goods);
   return (
     <div className={"header"}>
       <img src="" alt="" />

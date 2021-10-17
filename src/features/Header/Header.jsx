@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import styles from './Header.module.scss';
+import logo from '../../assets/img/logo.svg'
 
 const Header = () => {
   const totalCount = useSelector((state) => state.basketHandler.totalCount);
-  const goods = useSelector((state) => state.basketHandler.goods);
-  console.log('totalCountgoods',goods);
+  const goods = useSelector((state) => state.basketHandler);
+  console.log('totalCountgoods', goods);
   return (
-    <div className={"header"}>
-      <img src="" alt="" />
-      <div className="menu">
-        <Link to="/">Каталог</Link>
-        <Link to="/basket">
+    <div className={styles.header}>
+      <Link className={styles.link} to="/"><img className={styles.logo} src={logo} alt="" /></Link>
+      <div className={styles.menu}>
+        <Link className={styles.link} to="/">Каталог</Link>
+        <Link className={styles.link} to="/basket">
           Корзина <span>({totalCount})</span>
         </Link>
       </div>

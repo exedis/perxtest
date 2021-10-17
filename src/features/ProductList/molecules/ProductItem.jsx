@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import styles from "./ProductItem.module.scss";
 import { useDispatch } from "react-redux";
-import { ADD_GOOD } from "../../../constants";
+import { ADD_GOODS } from "../../../constants";
 
 const ProductItem = ({ name, price, img }) => {
   const [counter, setCounter] = useState(1);
@@ -25,7 +25,7 @@ const ProductItem = ({ name, price, img }) => {
   };
 
   const addBasketHandler = () => {
-    dispatch({ type: ADD_GOOD, payload: {
+    dispatch({ type: ADD_GOODS, payload: {
         name:checkName,
         price:checkPrice,
         img:checkImg,

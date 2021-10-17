@@ -1,9 +1,13 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-.container{
+body {
+  font-family: "Ubuntu";
+}
+
+.container {
   max-width: 1170px;
   margin: 0 auto;
 }

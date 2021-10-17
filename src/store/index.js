@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { combineReducers } from "redux";
 import { basketReducer } from "./reducers/basketReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import {
@@ -26,14 +26,14 @@ export const rootReducer = combineReducers({
 export const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }),
-  })
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
 
 //export const persistedReducer = persistReducer(persistConfig, rootReducer);
 

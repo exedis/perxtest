@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import classnames from "classnames";
 import styles from "./BasketRow.module.scss";
 
 const BasketRow = ({
@@ -9,6 +11,19 @@ const BasketRow = ({
   cost,
   removeHandler,
 }) => {
+
+  const [counterProd, setCounterProd] = useState(counter);
+  const addCountHandler = () => {
+    setCounterProd(counterProd + 1);
+  };
+
+  const removeCountHandler = () => {
+    if (counterProd > 1) {
+      setCounterProd(counterProd - 1);
+    }
+  };
+
+
   return (
     <tr key={index} className={styles.basketRow}>
       <td>{index}</td>
@@ -17,7 +32,24 @@ const BasketRow = ({
       </td>
       <td>{name}</td>
       <td>{price}</td>
-      <td>{counter}</td>
+      <td>
+        <div className={styles.counter}>
+          <button
+            className={classnames(styles.button, styles.add)}
+            onClick={removeCountHandler}
+          >
+            -
+          </button>
+          <input className={styles.input} type="text" value={counterProd} readOnly />
+          <button
+            className={classnames(styles.button, styles.remove)}
+            onClick={addCountHandler}
+          >
+            +
+          </button>
+        </div>
+
+      </td>
       <td>{cost ?? price}</td>
       <td>
         <button onClick={() => removeHandler(name, price, counter)}>X</button>

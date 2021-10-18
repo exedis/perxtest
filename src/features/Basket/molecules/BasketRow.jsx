@@ -10,19 +10,21 @@ const BasketRow = ({
   counter,
   cost,
   removeHandler,
+  changeCountHandler,
 }) => {
-
   const [counterProd, setCounterProd] = useState(counter);
-  const addCountHandler = () => {
+
+  const addCountHandler = (name, price) => {
     setCounterProd(counterProd + 1);
+    changeCountHandler(name, price, counterProd);
   };
 
-  const removeCountHandler = () => {
+  const removeCountHandler = (name, price) => {
     if (counterProd > 1) {
       setCounterProd(counterProd - 1);
+      changeCountHandler(name, price, counterProd);
     }
   };
-
 
   return (
     <tr key={index} className={styles.basketRow}>
@@ -36,19 +38,23 @@ const BasketRow = ({
         <div className={styles.counter}>
           <button
             className={classnames(styles.button, styles.add)}
-            onClick={removeCountHandler}
+            onClick={() => removeCountHandler(name, price)}
           >
             -
           </button>
-          <input className={styles.input} type="text" value={counterProd} readOnly />
+          <input
+            className={styles.input}
+            type="text"
+            value={counterProd}
+            readOnly
+          />
           <button
             className={classnames(styles.button, styles.remove)}
-            onClick={addCountHandler}
+            onClick={() => addCountHandler(name, price)}
           >
             +
           </button>
         </div>
-
       </td>
       <td>{cost ?? price}</td>
       <td>

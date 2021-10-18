@@ -1,7 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { BasketRow } from "./molecules";
 import styles from "./Basket.module.scss";
-import { REMOVE_GOODS, REMOVE_GOODS_ALL } from "../../constants";
+import {
+  REMOVE_GOODS,
+  REMOVE_GOODS_ALL,
+  CHANGE_GOODS_COUNT,
+} from "../../constants";
 
 const Basket = () => {
   const getGoods = useSelector((state) => state.basketHandler.goods);
@@ -9,9 +13,20 @@ const Basket = () => {
 
   const dispatch = useDispatch();
 
-  const onRemoveHandler = (name, price, counter) => {
+  const onRemove = (name, price, counter) => {
     dispatch({
       type: REMOVE_GOODS,
+      payload: {
+        name,
+        price,
+        counter,
+      },
+    });
+  };
+
+  const onChangeCount = (name, price, counter) => {
+    dispatch({
+      type: CHANGE_GOODS_COUNT,
       payload: {
         name,
         price,
@@ -52,16 +67,20 @@ const Basket = () => {
                   counter={good.counter}
                   cost={good.cost}
                   removeHandler={(name, price, counter) =>
-                    onRemoveHandler(name, price, counter)
+                    onRemove(name, price, counter)
+                  }
+                  changeCountHandler={(name, price, counter) =>
+                    onChangeCount(name, price, counter)
                   }
                 />
               ))}
             </tbody>
           </table>
-          <div><button onClick={removeAllGoods}>Удалить все!</button></div>
-          <div>Итого: {getTotalCost} $</div>
+          <div>
+            <button onClick={removeAllGoods}>Удалить все!</button>
+          </div>
+          {getTotalCost && <div>Итого: {getTotalCost} $</div>}
         </div>
-
       ) : (
         <div>Товаров нет!</div>
       )}

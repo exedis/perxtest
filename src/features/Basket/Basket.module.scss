@@ -1,3 +1,23 @@
 .baskedTable {
-  
+  margin: 30px 0;
+
+  .table {
+    width: 100%;
+    border: 1px solid rgb(179 216 102 / 20%);
+    text-align: center;
+
+    .tableHead {
+      line-height: 40px;
+    }
+  }
+
+  .removeAll {
+    background: #FF7673;
+    border: none;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 3px;
+    margin: 20px 0;
+    cursor: pointer;
+  }
 }

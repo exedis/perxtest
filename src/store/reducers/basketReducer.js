@@ -13,37 +13,26 @@ const defaultState = {
 
 export const basketReducer = (state = defaultState, action) => {
   const changeProdCount = (payload) => {
-    // let cacheState = [];
-    // cacheState = {
-    //   ...state,
-    //   goods: [...state.goods, payload],
-    // };
-    const uniqueGoods = state.goods?.reduce((accum, val) => {
-      const doublesIndex = accum.findIndex(
-        (arrayItem) =>
-        arrayItem.price === payload.price //&& arrayItem.name === payload.name
-      );
+      let totalCount = 0;
+      const newArr = state.goods.map((item, index) => {
 
-      if (doublesIndex === -1) {
-        accum.push({
-          ...val,
-        });
-      } else {
-        console.log('count', payload);
-        let prodCount = accum[doublesIndex].counter + payload.counter;
-        console.log('prodCount', prodCount);
-        accum[doublesIndex].counter = prodCount;
-        //  accum[doublesIndex].cost = Number(payload.counter * val.price);
-      }
-      return accum;
-    }, []);
+          if (item.price === payload.price && item.name === payload.name) {
+              return {
+                  ...item,
+                  counter: payload.counter
+              }
+          }
+          console.log('totalCount123',Number( state.goods[index].counter))
+          totalCount = Number(totalCount) + Number( state.goods[index].counter);
+          return item
+      })
 
-    return {
-      ...state,
-      goods: [...uniqueGoods],
-      totalCount: state.totalCount + payload.counter,
-      totalCost: state.totalCost + Number(payload.price * payload.counter),
-    };
+      return {
+          ...state,
+          goods: [...newArr],
+          totalCount: state.totalCount + payload.counter,
+          totalCost: state.totalCost + Number(payload.price * payload.counter),
+      };
   };
 
   const addGoods = (payload) => {

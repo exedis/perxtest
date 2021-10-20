@@ -13,26 +13,28 @@ const defaultState = {
 
 export const basketReducer = (state = defaultState, action) => {
   const changeProdCount = (payload) => {
-      let totalCount = 0;
-      const newArr = state.goods.map((item, index) => {
+    let totalCount = 0;
+    let totalCost = 0;
+    const newArr = state.goods.map((item) => {
+      if (item.price === payload.price && item.name === payload.name) {
+        return {
+          ...item,
+          counter: payload.counter,
+        };
+      }
+      return item;
+    });
 
-          if (item.price === payload.price && item.name === payload.name) {
-              return {
-                  ...item,
-                  counter: payload.counter
-              }
-          }
-          console.log('totalCount123',Number( state.goods[index].counter))
-          totalCount = Number(totalCount) + Number( state.goods[index].counter);
-          return item
-      })
-
-      return {
-          ...state,
-          goods: [...newArr],
-          totalCount: state.totalCount + payload.counter,
-          totalCost: state.totalCost + Number(payload.price * payload.counter),
-      };
+    for (let i = 0; i <= newArr.length - 1; i++) {
+      totalCount += Number(newArr[i].counter);
+      totalCost += Number(newArr[i].price * newArr[i].counter);
+    }
+    return {
+      ...state,
+      goods: [...newArr],
+      totalCount: totalCount,
+      totalCost: totalCost,
+    };
   };
 
   const addGoods = (payload) => {
@@ -41,7 +43,6 @@ export const basketReducer = (state = defaultState, action) => {
       ...state,
       goods: [...state.goods, payload],
     };
-    //  if (cacheState.goods.length > 0) {
     const uniqueGoods = cacheState.goods?.reduce((accum, val) => {
       const doublesIndex = accum.findIndex(
         (arrayItem) =>
@@ -67,14 +68,6 @@ export const basketReducer = (state = defaultState, action) => {
       totalCount: state.totalCount + payload.counter,
       totalCost: state.totalCost + Number(payload.price * payload.counter),
     };
-    // } else {
-    //   return {
-    //     ...state,
-    //     goods: [...state.goods, payload],
-    //     totalCount: state.totalCount + payload.counter,
-    //     totalCost: (state.totalCost + Number(payload.price * payload.counter)),
-    //   };
-    // }
   };
 
   switch (action.type) {

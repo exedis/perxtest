@@ -1,5 +1,3 @@
-import ProductList from './ProductList';
+import ProductList from "./ProductList";
 
-export {
-    ProductList,
-};
+export { ProductList };

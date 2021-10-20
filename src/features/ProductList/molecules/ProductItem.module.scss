@@ -7,7 +7,14 @@
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: rgb(0 0 0 / 17%) 0 0 6px 1px;
-
+  .prodInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px 10px;
+    .name {
+      font-weight: bold;
+    }
+  }
   .img {
     max-width: 260px;
     width: 100%;
@@ -35,25 +42,25 @@
     -webkit-justify-content: center;
     justify-content: center;
 
-    .input{
-        width: 30px;
-        border: 1px solid #81be00;
-        text-align: center;
-        padding: 2px 0;
-        font-size: 15px;
+    .input {
+      width: 30px;
+      border: 1px solid #81be00;
+      text-align: center;
+      padding: 2px 0;
+      font-size: 15px;
     }
-    .button{
-        width: 30px;
-        background: #fff;
-        border: 1px solid #81be00;
-        color: #303030;
-        cursor: pointer;
+    .button {
+      width: 30px;
+      background: #fff;
+      border: 1px solid #81be00;
+      color: #303030;
+      cursor: pointer;
     }
-    .add{
-        border-radius: 3px 0 0 3px;
+    .add {
+      border-radius: 3px 0 0 3px;
     }
-    .remove{
-        border-radius: 0 3px 3px 0;
+    .remove {
+      border-radius: 0 3px 3px 0;
     }
   }
 }

@@ -1,5 +1,19 @@
 .baskedTable {
   margin: 30px 0;
+  .basketWrapper {
+    display: flex;
+    .goodsList {
+      width: 75%;
+      margin: 0 20px 0 0;
+    }
+    .checkInfo {
+      border-left: 1px solid #81be00;
+      padding: 10px 20px;
+      .fullPrice {
+        font-weight: bold;
+      }
+    }
+  }
 
   .table {
     width: 100%;
@@ -12,12 +26,29 @@
   }
 
   .removeAll {
-    background: #FF7673;
+    background: #ff7673;
     border: none;
     color: #fff;
     padding: 10px 25px;
     border-radius: 3px;
     margin: 20px 0;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .baskedTable {
+    .basketWrapper {
+      flex-direction: column;
+    }
+    .goodsList {
+      width: 100% !important;
+    }
+    .checkInfo {
+      border: none !important;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-around;
+    }
   }
 }

@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+.App {
+  padding: 0 10px;
+}
 
 body {
   font-family: "Ubuntu";

@@ -25,20 +25,24 @@ const ProductItem = ({ name, price, img }) => {
   };
 
   const addBasketHandler = () => {
-    dispatch({ type: ADD_GOODS, payload: {
-        name:checkName,
-        price:checkPrice,
-        img:checkImg,
-        counter
-    } });
+    dispatch({
+      type: ADD_GOODS,
+      payload: {
+        name: checkName,
+        price: checkPrice,
+        img: checkImg,
+        counter,
+      },
+    });
   };
 
   return (
     <div className={styles.productItem}>
       <img className={classnames(styles.img)} src={checkImg} alt={checkName} />
-
-      <div className="name">{checkName}</div>
-      <div className="price">{checkPrice}$</div>
+      <div className={styles.prodInfo}>
+        <div className={styles.name}>{checkName}</div>
+        <div className="price">{checkPrice}$</div>
+      </div>
 
       <div className={styles.counter}>
         <button
